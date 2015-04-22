@@ -6,4 +6,4 @@ $(TARGET) : $(OBJS)
 	gcc $(OBJS) -o $(TARGET)
 
 clean:
-	rm ${OBJS} ${TARGET}
+	rm -rf ${OBJS} ${TARGET}
