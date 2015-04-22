@@ -1,6 +1,9 @@
-OBJS = LinearList.o
+OBJS = LinearList.o main.o
 TARGET = LinearList
-CFLAGS = -I ../utils
+CFLAGS = -I ../utils -g -Wall
 
 $(TARGET) : $(OBJS)
-	gcc $(OBJS) -o $(TARGET) -g -Wall
+	gcc $(OBJS) -o $(TARGET)
+
+clean:
+	rm ${OBJS} ${TARGET}
