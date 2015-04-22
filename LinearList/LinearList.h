@@ -36,4 +36,11 @@ extern status_t LinearListInsert(LinearList *list, int pos, ElemType Elem);
 extern status_t LinearListDelete(LinearList *list, int pos, ElemType *pDelElem);
 
 extern status_t LinearListGetElement(LinearList *list, int pos, ElemType *pOutElem);
+
+extern ElemType LinearListSearch(LinearList *list, ElemType key, int (*compare)(ElemType, ElemType));
+/*
+ * Union bList into aList.
+ * */
+extern void LinearListUnion(LinearList *aList, LinearList *bList, int (*compare)(ElemType, ElemType));
+
 #endif //_LINEAR_LIST_H_

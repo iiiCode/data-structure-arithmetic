@@ -121,3 +121,30 @@ status_t LinearListGetElement(LinearList *list, int pos, ElemType *pOutElem)
 
     return OK;
 }
+
+void LinearListUnion(LinearList *aList, LinearList *bList, int (*compare)(ElemType, ElemType))
+{
+    int i;
+    ElemType elem;
+
+    for (i = 0; i < LinearListLength(bList); i ++) {
+        LinearListGetElement(bList, i, &elem);
+        if (! LinearListSearch(aList, elem, compare)) {
+            LinearListInsert(aList, i, elem);
+            LinearListDelete(bList, i, &elem);
+        }
+    }
+}
+
+ElemType LinearListSearch(LinearList *list, ElemType key, int (*compare)(ElemType, ElemType))
+{
+    int i;
+
+    for (i = 0; i < list->length; i ++) {
+        if (! compare(list->ElemBase[i], key)) {
+            return list->ElemBase[i];
+        }
+    }
+
+    return NULL;
+}

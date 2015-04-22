@@ -6,4 +6,6 @@ $(TARGET) : $(OBJS)
 	gcc $(OBJS) -o $(TARGET)
 
 clean:
-	rm -rf ${OBJS} ${TARGET}
+	rm -rf ${OBJS} ${TARGET} tags
+tags:
+	ctags -R .

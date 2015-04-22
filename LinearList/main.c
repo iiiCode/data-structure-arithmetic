@@ -49,6 +49,14 @@ void data_traverse(LinearList *list)
     putchar('\n');
 }
 
+static int compare(void *first, void *second)
+{
+    int *f = first;
+    int *s = second;
+
+    return *f - *s;
+}
+
 int main(int argc, char *argv[])
 {
     int pos;
@@ -56,7 +64,7 @@ int main(int argc, char *argv[])
     int arr[SIZE];
     LinearList list;
 
-    //srand(time(NULL));
+    srand(time(NULL));
 
     LinearListInit(&list);
     array_init(arr, SIZE);
@@ -90,6 +98,40 @@ int main(int argc, char *argv[])
 
     LinearListDestroy(&list, destroy);
 
+    //Test LinearListUnion
+    int aArr[12], bArr[15];
+    LinearList aList, bList;
+
+    array_init(aArr, 12);
+    array_init(bArr, 15);
+    array_show(aArr, 12);
+    array_show(bArr, 15);
+
+
+    LinearListInit(&aList);
+    LinearListInit(&bList);
+
+    for (i = 0; i < 12; i ++) {
+        v = malloc(sizeof(int));
+        *v = aArr[i];
+        LinearListInsert(&aList, 0, v);
+    }
+
+    for (i = 0; i < 15; i ++) {
+        v = malloc(sizeof(int));
+        *v = bArr[i];
+        LinearListInsert(&bList, 0, v);
+    }
+
+    LinearListTraverse(&aList, traverse); putchar('\n');
+    LinearListTraverse(&bList, traverse); putchar('\n');
+
+    LinearListUnion(&aList, &bList, compare);
+    LinearListTraverse(&aList, traverse); putchar('\n');
+
+
+    LinearListDestroy(&aList, destroy);
+    LinearListDestroy(&bList, destroy);
     return 0;
 }
 
