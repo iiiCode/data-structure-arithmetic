@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <pthread.h>
+#include <unistd.h>
 
 #include "utils.h"
 #include "CircleLinkList.h"
@@ -12,7 +14,8 @@ static int compare(const void *first, const void *second)
 
 static void traverse(const void *data)
 {
-    printf("%d ", *(int *)data);
+    printf("%d\n", *(int *)data);
+    sleep(1);
 }
 
 static void destroy(const void *data)
@@ -22,9 +25,16 @@ static void destroy(const void *data)
     FREE(_data);
 }
 
+static void * do_traverse(void *args)
+{
+    CircleLinkListInfiniteTraverse(args, traverse);
+    return NULL;
+}
+
 int main(int argc, char *argv[])
 {
     int i, *v;
+    pthread_t ptid;
     CircleLinkList list;
 
     srand(time(NULL));
@@ -41,7 +51,7 @@ int main(int argc, char *argv[])
     putchar('\n');
     CircleLinkListTraverse(&list, traverse);
     putchar('\n');
-
+#if 0
     while(! CircleLinkListEmpty(&list)) {
         i = rand() % 90 + 10;
         
@@ -56,6 +66,10 @@ int main(int argc, char *argv[])
             FREE(vv);
         }
     }
+#else
+    pthread_create(&ptid, NULL, do_traverse, &list);
+    pthread_join(ptid, NULL);
+#endif
 
     CircleLinkListDestroy(&list, destroy);
     return 0;

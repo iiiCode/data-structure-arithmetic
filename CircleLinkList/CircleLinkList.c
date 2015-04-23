@@ -139,3 +139,12 @@ void CircleLinkListTraverse(CircleLinkList *list, void (*traverse)(const void *)
         traverse(list->head->data);
     }
 }
+
+void CircleLinkListInfiniteTraverse(CircleLinkList *list, void (*traverse)(const void *))
+{
+        while(list->head) {
+            traverse(list->head->data);
+            list->head = list->head->next;
+        }
+}
+

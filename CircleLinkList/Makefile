@@ -3,7 +3,7 @@ TARGET = CircleLinkList
 CFLAGS = -I ../utils -g -Wall
 
 $(TARGET) : $(OBJS)
-	gcc $(OBJS) -o $(TARGET)
+	gcc $(OBJS) -o $(TARGET) -lpthread
 
 clean:
 	rm -rf ${OBJS} ${TARGET} tags
