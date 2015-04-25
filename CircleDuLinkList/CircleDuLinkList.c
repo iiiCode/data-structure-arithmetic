@@ -103,7 +103,7 @@ void * CircleDuLinkListDelete(CircleDuLinkList *list, void *key, int (*compare)(
     return NULL;
 }
 
-void CircleDuLinkListTraverse(CircleDuLinkList *list, int (*traverse)(void *))
+void CircleDuLinkListTraverse(CircleDuLinkList *list, void (*traverse)(void *))
 {
     struct node *n;
 
