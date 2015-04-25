@@ -19,6 +19,6 @@ extern bool CircleDuLinkListEmpty(CircleDuLinkList *list);
 extern void CircleDuLinkListInsert(CircleDuLinkList *list, void *data);
 extern void * CircleDuLinkListSearch(CircleDuLinkList *list, void *key, int (*compare)(const void *, const void *));
 extern void * CircleDuLinkListDelete(CircleDuLinkList *list, void *key, int (*compare)(const void *, const void *));
-extern void CircleDuLinkListTraverse(CircleDuLinkList *list, int (*traverse)(void *));
+extern void CircleDuLinkListTraverse(CircleDuLinkList *list, void (*traverse)(void *));
 
 #endif //_CIRCLE_DU_LINK_LIST_H_
